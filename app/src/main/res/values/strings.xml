@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">project</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_a_new_account_signup">Create a new account? SignUp</string>
+    <string name="signup">SignUp</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="age">Age</string>
+    <string name="fullname">FullName</string>
+    <string name="forget_password">Forget Password?</string>
+</resources>
