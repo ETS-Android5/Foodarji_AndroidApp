@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -86,8 +87,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         mAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(Login.this, "Login Successfully", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(Login.this, MainActivity.class));
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user.isEmailVerified()){
+                    Toast.makeText(Login.this, "Login Successfully", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(Login.this, MainActivity.class));
+                }else {
+                    user.sendEmailVerification();
+                    Toast.makeText(Login.this, "Check your Email to verify your account!", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
