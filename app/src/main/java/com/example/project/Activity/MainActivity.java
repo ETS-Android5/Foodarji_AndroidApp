@@ -15,6 +15,7 @@ import com.example.project.Domain.CategoryDomain;
 import com.example.project.Domain.FoodDomain;
 import com.example.project.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private void bottomNavigation() {
         FloatingActionButton floatingActionButton = findViewById(R.id.card_btn);
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
+        LinearLayout LogoutBtn = findViewById(R.id.Logout);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, MainActivity.class));
+            }
+        });
+
+        LogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this, IntroActivity.class));
             }
         });
     }

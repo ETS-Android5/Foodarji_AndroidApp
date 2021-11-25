@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.project.LoginRegister.Login;
 import com.example.project.LoginRegister.SignUp;
 import com.example.project.R;
 
@@ -23,7 +24,7 @@ public class IntroActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IntroActivity.this, SignUp.class));
+                startActivity(new Intent(IntroActivity.this, Login.class));
             }
         });
     }
