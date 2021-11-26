@@ -13,6 +13,8 @@ import com.example.project.Adapter.CategoryAdapter;
 import com.example.project.Adapter.PopularAdapter;
 import com.example.project.Domain.CategoryDomain;
 import com.example.project.Domain.FoodDomain;
+import com.example.project.LoginRegister.Login;
+import com.example.project.LoginRegister.Profile;
 import com.example.project.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton floatingActionButton = findViewById(R.id.card_btn);
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout LogoutBtn = findViewById(R.id.Logout);
+        LinearLayout ProfileBtn = findViewById(R.id.Profile);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +55,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Profile.class));
+            }
+        });
+
         LogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, IntroActivity.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
     }

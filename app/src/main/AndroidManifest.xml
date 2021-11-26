@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
+            android:name=".LoginRegister.Profile"
+            android:exported="false" />
+        <activity
             android:name=".LoginRegister.SignUp"
             android:exported="false" />
         <activity
