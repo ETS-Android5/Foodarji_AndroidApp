@@ -3,7 +3,12 @@ package com.example.project.LoginRegister;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,16 +31,22 @@ public class Login extends AppCompatActivity {
     private Button buttonLogin;
     private TextView textViewSignUp, textForgetPassword;
     private ProgressBar progressBar;
-
+    private SensorManager sensorManager;
     private FirebaseAuth mAuth;
+    private float acelVal, acelLast, shake; //current-Last-Differ
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        acelVal = SensorManager.GRAVITY_EARTH;
+        acelLast = SensorManager.GRAVITY_EARTH;
+        shake = 0.00f;
 
+        mAuth = FirebaseAuth.getInstance();
         textInputEditTextEmailLog = (TextInputEditText) findViewById(R.id.emailLogxml);
         textInputEditTextPasswordLog = (TextInputEditText) findViewById(R.id.passwordxml);
         buttonLogin = (Button) findViewById(R.id.buttonLoginxml);
@@ -53,15 +64,36 @@ public class Login extends AppCompatActivity {
             }
         });
         progressBar = (ProgressBar) findViewById(R.id.progressxml);
-        textForgetPassword= (TextView) findViewById(R.id.ForgetPasswordTextxml);
+        /*textForgetPassword= (TextView) findViewById(R.id.ForgetPasswordTextxml);
         textForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, ForgetPassword.class));
             }
-        });
+        });*/
         mAuth = FirebaseAuth.getInstance();
     }
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x= event.values[0];
+            float y= event.values[1];
+            float z= event.values[2];
+            acelLast = acelVal;
+            acelVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            float delta = acelVal-acelLast;
+            shake = shake*0.9f + delta;
+            if (shake>8){
+                startActivity(new Intent(Login.this, ForgetPassword.class));
+                Toast.makeText(Login.this, "Time to reset Password!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
 
     private void userLogin() {
         String email = textInputEditTextEmailLog.getText().toString().trim();
