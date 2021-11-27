@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Orange"
     tools:context=".LoginRegister.Profile">
 
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background_intro" />
 
     <TextView
         android:id="@+id/textViewWelcome"
@@ -41,7 +49,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsmedium"
-            android:text="FullName:"
+            android:text="FullName  "
+            android:drawableEnd="@drawable/ic_name"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +58,12 @@
 
         <TextView
             android:id="@+id/FullName"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:drawableStart="@drawable/ic_name"
+            android:gravity="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +76,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsmedium"
-            android:text="Email Address:"
+            android:text="Email Address  "
+            android:drawableEnd="@drawable/ic_email"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,12 +85,12 @@
 
         <TextView
             android:id="@+id/EmailAddress"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:drawableStart="@drawable/ic_email"
+            android:gravity="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +103,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/poppinsmedium"
-            android:text="Age:"
+            android:text="Age   "
+            android:drawableEnd="@drawable/ic_user"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,12 +112,12 @@
 
         <TextView
             android:id="@+id/Age"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:drawableStart="@drawable/ic_user"
+            android:gravity="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,16 +127,18 @@
 
     <Button
         android:id="@+id/LogoutProfile"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="154dp"
-        android:layout_marginEnd="163dp"
-        android:text="GoBack"
-        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/orange_button_background"
+        android:text="Back"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

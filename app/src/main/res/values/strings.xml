@@ -9,4 +9,10 @@
     <string name="age">Age</string>
     <string name="fullname">FullName</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="email1">Email</string>
+    <string name="background">Background</string>
+    <string name="passwordreset">PasswordReset</string>
+    <string name="foodarji">Foodarji</string>
+    <string name="enter_your_email">Enter Your Email:</string>
+    <string name="rest">Rest</string>
 </resources>

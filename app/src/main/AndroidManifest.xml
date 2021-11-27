@@ -10,14 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
-            android:name=".LoginRegister.Profile"
-            android:exported="false" />
+            android:name=".LoginRegister.ForgetPassword"/>
         <activity
-            android:name=".LoginRegister.SignUp"
-            android:exported="false" />
+            android:name=".LoginRegister.Profile" />
         <activity
-            android:name=".LoginRegister.Login"
-            android:exported="false" />
+            android:name=".LoginRegister.SignUp" />
+        <activity
+            android:name=".LoginRegister.Login" />
         <activity android:name=".Activity.CartListActivity" />
         <activity android:name=".Activity.ShowDetailActivity" />
         <activity android:name=".Activity.IntroActivity">

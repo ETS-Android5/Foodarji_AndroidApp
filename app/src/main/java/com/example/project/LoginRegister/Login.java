@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity {
 
     private TextInputEditText textInputEditTextEmailLog, textInputEditTextPasswordLog;
     private Button buttonLogin;
@@ -39,28 +39,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         textInputEditTextEmailLog = (TextInputEditText) findViewById(R.id.emailLogxml);
         textInputEditTextPasswordLog = (TextInputEditText) findViewById(R.id.passwordxml);
         buttonLogin = (Button) findViewById(R.id.buttonLoginxml);
-        buttonLogin.setOnClickListener(this);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userLogin();
+            }
+        });
         textViewSignUp = (TextView) findViewById(R.id.signUpTextxml);
-        textViewSignUp.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, SignUp.class));
+            }
+        });
         progressBar = (ProgressBar) findViewById(R.id.progressxml);
         textForgetPassword= (TextView) findViewById(R.id.ForgetPasswordTextxml);
-        textForgetPassword.setOnClickListener(this);
+        textForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, ForgetPassword.class));
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.signUpTextxml:
-                startActivity(new Intent(this, SignUp.class));
-                break;
-            case R.id.buttonLoginxml:
-                userLogin();
-                break;
-            case R.id.ForgetPasswordTextxml:
-                ///
-        }
-
     }
 
     private void userLogin() {
