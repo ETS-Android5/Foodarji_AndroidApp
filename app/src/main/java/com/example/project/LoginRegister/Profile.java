@@ -20,7 +20,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements View.OnClickListener {
     private FirebaseUser user;
     private CollectionReference reference;
     private String userID;
@@ -36,37 +36,40 @@ public class Profile extends AppCompatActivity {
         reference = FirebaseFirestore.getInstance().collection("Users");
         userID = user.getUid();
 
-        Logout = (Button) findViewById(R.id.LogoutProfile);
+        Logout = (Button) findViewById(R.id.LogoutBtn);
+        Logout.setOnClickListener(this);
 
-        final TextView textFullName= (TextView) findViewById(R.id.FullName);
+        final TextView textFullName = (TextView) findViewById(R.id.FullName);
         final TextView textEmail = (TextView) findViewById(R.id.EmailAddress);
         final TextView textAge = (TextView) findViewById(R.id.Age);
 
         reference.document(userID).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-               User userprofile = value.toObject(User.class);
-               if (userprofile != null){
-                   String fullName = userprofile.fullName;
-                   String email = userprofile.email;
-                   String age = userprofile.age;
+                User userprofile = value.toObject(User.class);
+                if (userprofile != null) {
+                    String fullName = userprofile.fullName;
+                    String email = userprofile.email;
+                    String age = userprofile.age;
 
-                   textFullName.setText(fullName);
-                   textEmail.setText(email);
-                   textAge.setText(age);
+                    textFullName.setText(fullName);
+                    textEmail.setText(email);
+                    textAge.setText(age);
 
-                   Toast.makeText(Profile.this, "Successfully!", Toast.LENGTH_LONG).show();
-               }else {
-                   Toast.makeText(Profile.this, "Failed to get data!", Toast.LENGTH_LONG).show();
-               }
+                    Toast.makeText(Profile.this, "Successfully!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(Profile.this, "Failed to get data!", Toast.LENGTH_LONG).show();
+                }
             }
         });
-        Logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Profile.this, MainActivity.class));
-            }
-        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.LogoutBtn:
+                startActivity(new Intent(this, Login.class));
+                break;
+        }
     }
 }

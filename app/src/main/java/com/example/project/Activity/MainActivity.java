@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView.Adapter adapter, adapter2;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
 
@@ -41,34 +41,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout LogoutBtn = findViewById(R.id.Logout);
         LinearLayout ProfileBtn = findViewById(R.id.Profile);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CartListActivity.class));
-            }
-        });
+        floatingActionButton.setOnClickListener(this);
+        homeBtn.setOnClickListener(this);
+        ProfileBtn.setOnClickListener(this);
+        LogoutBtn.setOnClickListener(this);
 
-        homeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
-            }
-        });
-
-        ProfileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Profile.class));
-            }
-        });
-
-        LogoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, Login.class));
-            }
-        });
     }
 
     private void recyclerViewPopular() {
@@ -101,5 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new CategoryAdapter(categoryList);
         recyclerViewCategoryList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.card_btn:
+                startActivity(new Intent(MainActivity.this, CartListActivity.class));
+                break;
+            case R.id.homeBtn:
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                break;
+            case R.id.Profile:
+                startActivity(new Intent(MainActivity.this, Profile.class));
+                break;
+            case R.id.Logout:
+                startActivity(new Intent(MainActivity.this, Login.class));
+                break;
+        }
     }
 }
